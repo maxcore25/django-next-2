@@ -1,0 +1,12 @@
+﻿﻿asgiref
+Django
+django-cors-headers
+django-js-asset
+django-mptt
+djangorestframework
+psycopg2
+PyJWT
+python-dotenv
+pytz
+sqlparse
+tzdata
