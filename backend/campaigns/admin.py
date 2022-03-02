@@ -8,5 +8,11 @@ class CampaignModelAdmin(admin.ModelAdmin):
     list_per_page = 1
 
 
+class SubscriberModelAdmin(admin.ModelAdmin):
+    list_display = ('email', 'campaign', 'created_at')
+    search_fields = ('email', 'campaign__title', 'created_at')
+    list_per_page = 1
+
+
 admin.site.register(Campaign, CampaignModelAdmin)
-admin.site.register(Subscriber)
+admin.site.register(Subscriber, SubscriberModelAdmin)
