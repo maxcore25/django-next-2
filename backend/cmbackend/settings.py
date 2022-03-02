@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import cloudinary
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 cloudinary.config(cloud_name=os.environ.get('CLOUD_NAME'), api_key=os.environ.get('CLOUD_API_KEY'),
                   api_secret=os.environ.get('CLOUD_API_SECRET'))
