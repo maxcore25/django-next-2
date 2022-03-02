@@ -7,8 +7,8 @@ class Campaign(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     slug = models.SlugField(max_length=255)
-    created_at = models.DateTimeField(auto_created=200)
-    updated_at = models.DateTimeField(auto_now_add=200)
+    created_at = models.DateTimeField(auto_created=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
     logo = CloudinaryField('Image', overwrite=True, format='jpg')
 
     class Meta:
@@ -25,3 +25,17 @@ class Campaign(models.Model):
 
         self.slug = to_assign
         super().save(*args, **kwargs)
+
+
+class Subscriber(models.Model):
+    campaign = models.ForeignKey(to=Campaign, on_delete=models.DO_NOTHING)
+    email = models.EmailField(max_length=255)
+    created_at = models.DateTimeField(auto_created=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+    logo = CloudinaryField('Image', overwrite=True, format='jpg')
+
+    class Meta:
+        ordering = ('-created_at',)
+
+    def __str__(self):
+        return self.email
