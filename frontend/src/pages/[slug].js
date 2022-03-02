@@ -4,7 +4,7 @@ import dateFormat from 'dateformat';
 import { useState } from 'react';
 
 const Campaign = ({ data }) => {
-  console.log(data);
+  // console.log(data);
   const route = useRouter();
 
   const [email, setEmail] = useState('');
@@ -19,7 +19,8 @@ const Campaign = ({ data }) => {
       },
       body: JSON.stringify({ email, campaign: data.id }),
     };
-    fetch(`${process.env.BASE_URL}subscribers`, options)
+    console.log(`${process.env.NEXT_PUBLIC_BASE_URL}subscribers`);
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}subscribers`, options)
       .then(res => res.json())
       .then(response => console.log('response', response))
       .catch(error => console.log('error', error));
