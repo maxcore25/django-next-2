@@ -8,6 +8,8 @@ const Campaign = ({ data }) => {
   const route = useRouter();
 
   const [email, setEmail] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleOnSubmit = e => {
     e.preventDefault();
@@ -19,11 +21,14 @@ const Campaign = ({ data }) => {
       },
       body: JSON.stringify({ email, campaign: data.id }),
     };
-    console.log(`${process.env.NEXT_PUBLIC_BASE_URL}subscribers`);
+
+    setIsSubmitting(true);
+
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}subscribers`, options)
       .then(res => res.json())
-      .then(response => console.log('response', response))
-      .catch(error => console.log('error', error));
+      .then(response => setIsSubmitted(true))
+      .catch(error => console.log('error', error))
+      .finally(() => setIsSubmitting(false));
   };
 
   return (
@@ -59,20 +64,28 @@ const Campaign = ({ data }) => {
           </small>
         </div>
       </div>
-      <form onSubmit={handleOnSubmit}>
-        <div>
-          <input
-            onChange={event => setEmail(event.target.value)}
-            type='email'
-            name='email'
-            placeholder='Enter email'
-            required
-          />
-        </div>
-        <div>
-          <input type='submit' value='SUBSCRIBE' />
-        </div>
-      </form>
+      {!isSubmitted ? (
+        <form onSubmit={handleOnSubmit}>
+          <div>
+            <input
+              onChange={event => setEmail(event.target.value)}
+              type='email'
+              name='email'
+              placeholder='Enter email'
+              required
+            />
+          </div>
+          <div>
+            <input
+              type='submit'
+              value={isSubmitting ? 'PLEASE WAIT' : 'SUBSCRIBE'}
+              disabled={isSubmitting}
+            />
+          </div>
+        </form>
+      ) : (
+        <h1 style={{ color: 'green' }}>Thank you!</h1>
+      )}
     </div>
   );
 };
