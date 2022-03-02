@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
+import dateFormat from 'dateformat';
 
 export default function Home({ data, error }) {
   console.log(data);
@@ -8,6 +9,9 @@ export default function Home({ data, error }) {
 
   return (
     <>
+      <Head>
+        <title>Campaign Manager</title>
+      </Head>
       <main>
         <h1>Available Campaigns</h1>
         <p>lorem test</p>
@@ -26,7 +30,12 @@ export default function Home({ data, error }) {
               {el.id} - {el.title}
             </h1>
             <p>{el.description}</p>
-            <p>{el.created_at}</p>
+            <small>
+              {dateFormat(
+                new Date(el.created_at),
+                'ddd, mmmm, dS, yyyy, h:MM:ss TT'
+              )}
+            </small>
           </div>
         ))}
       </main>
