@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import dateFormat from 'dateformat';
+import Link from 'next/link';
 
 export default function Home({ data, error }) {
   console.log(data);
@@ -17,7 +18,16 @@ export default function Home({ data, error }) {
         <p>lorem test</p>
 
         {data.map(el => (
-          <div key={el.slug} style={{ border: '1px solid #000' }}>
+          <div
+            key={el.slug}
+            style={{
+              border: '1px solid #000',
+              display: 'flex',
+              gap: 20,
+              alignItems: 'center',
+              padding: 20,
+              margin: 10,
+            }}>
             <div>
               <Image
                 src={`https://res.cloudinary.com/dkd3mgbyi/${el.logo}`}
@@ -26,16 +36,22 @@ export default function Home({ data, error }) {
                 height={120}
               />
             </div>
-            <h1>
-              {el.id} - {el.title}
-            </h1>
-            <p>{el.description}</p>
-            <small>
-              {dateFormat(
-                new Date(el.created_at),
-                'ddd, mmmm, dS, yyyy, h:MM:ss TT'
-              )}
-            </small>
+            <div>
+              <Link href={`/` + el.slug}>
+                <a>
+                  <h1>
+                    {el.id} - {el.title}
+                  </h1>
+                </a>
+              </Link>
+              <p>{el.description}</p>
+              <small>
+                {dateFormat(
+                  new Date(el.created_at),
+                  'ddd, mmmm, dS, yyyy, h:MM:ss TT'
+                )}
+              </small>
+            </div>
           </div>
         ))}
       </main>
