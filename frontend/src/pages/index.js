@@ -64,7 +64,7 @@ export async function getStaticProps() {
   let error = null;
 
   try {
-    const response = await fetch(`${process.env.BASE_URL}api/campaigns/`);
+    const response = await fetch(`${process.env.BASE_URL}/campaigns`);
     data = await response.json();
   } catch (err) {
     error = JSON.stringify(err);

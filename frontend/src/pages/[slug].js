@@ -9,4 +9,16 @@ const Campaign = () => {
   );
 };
 
+export async function getStaticPaths() {
+  const response = await fetch(`${process.env.BASE_URL}/campaigns`);
+  data = await response.json();
+
+  return {
+    props: {
+      data,
+      error,
+    },
+  };
+}
+
 export default Campaign;
