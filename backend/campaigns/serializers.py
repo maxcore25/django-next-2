@@ -11,4 +11,4 @@ class CampaignSerializer(serializers.ModelSerializer):
 class SubscriberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscriber
-        fields = '__all__'
+        fields = ('email', 'campaign')

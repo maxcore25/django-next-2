@@ -30,9 +30,8 @@ class Campaign(models.Model):
 class Subscriber(models.Model):
     campaign = models.ForeignKey(to=Campaign, on_delete=models.DO_NOTHING)
     email = models.EmailField(max_length=255)
-    created_at = models.DateTimeField(auto_created=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
-    logo = CloudinaryField('Image', overwrite=True, format='jpg')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ('-created_at',)
